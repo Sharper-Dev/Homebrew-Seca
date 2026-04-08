@@ -1,2 +1,2 @@
 3dstool -cvtf romfs "../romfs.bin" --romfs-dir "../romfs"
-makerom -f cia -o "../build/lpp-3ds.cia" -elf "../build/lpp-3ds.elf" -rsf "../build assets/cia_workaround.rsf" -icon "../build assets/icon.icn" -banner "../build assets/banner.bnr" -exefslogo -target t -romfs "../romfs.bin" -major 1 -minor 0 -micro 0
+makerom -f cia -o "../build/lpp-3ds.cia" -elf "../build/lpp-3ds.elf" -rsf "../build assets/cia_workaround.rsf" -icon "../build assets/icon.icn" -banner "../build assets/banner.bnr" -exefslogo -target t -romfs "../romfs.bin" -ver 1024

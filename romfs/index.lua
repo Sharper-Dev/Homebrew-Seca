@@ -12,7 +12,6 @@ local BottomScreen = require("bottom_screen")
 local FontsManager = require("fonts_manager")
 
 local rlkSound = nil;
-local onHomeMenu = false
 
 local function setup()
     FontsManager.loadAllFonts()
@@ -33,11 +32,15 @@ local function update()
     TopScreen.draw()
     BottomScreen.draw()
     
-    if onHomeMenu then
-        onHomeMenu = false
-        Sound.resume(rlkSound)
-        JPGV.resume(TopScreen.jpgvVideo)
-        JPGV.resume(BottomScreen.jpgvVideo) 
+    if InputSystem.getKeyDown(KEY_HOME) then
+        JPGV.unload(TopScreen.jpgvVideo)
+        Sound.pause(rlkSound)
+        Sound.close(rlkSound)
+        Sound.term()
+        rlkSound = nil
+        TopScreen.jpgvVideo = nil
+        BottomScreen.jpgvVideo = nil
+        System.exit()
     end
 end
 
@@ -50,25 +53,7 @@ while true do
     
     update()
     
-    Screen.flip()
-
-    if InputSystem.getKeyDown(KEY_HOME) then
-        onHomeMenu = true
-        JPGV.pause(TopScreen.jpgvVideo)
-        JPGV.pause(BottomScreen.jpgvVideo)
-        Sound.pause(rlkSound)
-        System.showHomeMenu()
-    end
     
-    if System.checkStatus() == APP_EXITING then
-        Sound.pause(rlkSound)
-        Sound.close(rlkSound)
-        Sound.term()
-        JPGV.stop(TopScreen.jpgvVideo)
-        JPGV.unload(TopScreen.jpgvVideo)
-        JPGV.stop(BottomScreen.jpgvVideo)
-        JPGV.unload(BottomScreen.jpgvVideo)
-        System.exit()
-        break
-    end
+    Screen.flip()
 end
+
