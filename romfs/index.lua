@@ -50,10 +50,6 @@ while true do
     InputSystem.readInputs()
     Screen.clear(TOP_SCREEN)
     Screen.clear(BOTTOM_SCREEN)
-    
     update()
-    
-    
     Screen.flip()
 end
-
